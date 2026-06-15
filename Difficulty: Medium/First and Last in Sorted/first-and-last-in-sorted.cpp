@@ -13,8 +13,8 @@ private:
             int mid = low + (high - low) / 2;
             
             if (arr[mid] == x) {
-                first = mid;      // Record candidate
-                high = mid - 1;   // Keep searching LEFT
+                first = mid;      
+                high = mid - 1;   
             } else if (arr[mid] < x) {
                 low = mid + 1;
             } else {
@@ -33,8 +33,8 @@ private:
             int mid = low + (high - low) / 2;
             
             if (arr[mid] == x) {
-                last = mid;       // Record candidate
-                low = mid + 1;    // Keep searching RIGHT
+                last = mid;       
+                low = mid + 1;    
             } else if (arr[mid] < x) {
                 low = mid + 1;
             } else {
@@ -46,7 +46,6 @@ private:
 
 public:
     vector<int> find(vector<int>& arr, int x) {
-        // C++ allows us to return a vector instantly using initializer lists {}
         return {getFirst(arr, x), getLast(arr, x)};
     }
 };
