@@ -17,8 +17,6 @@ class Solution {
                 right--;
             }
         }
-        
-        // If no such pair exists
         return {-1, -1};
     }
 };
