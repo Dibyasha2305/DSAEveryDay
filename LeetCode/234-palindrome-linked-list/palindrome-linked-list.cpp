@@ -10,6 +10,7 @@
  */
 class Solution {
 public:
+    // Helper function to reverse a linked list
     ListNode* reverseList(ListNode* head) {
         ListNode* prev = NULL;
         ListNode* temp = head;
@@ -24,34 +25,40 @@ public:
     }
 
     bool isPalindrome(ListNode* head) {
+        // Base case: empty list or single node is a palindrome
         if (head == NULL || head->next == NULL) {
             return true;
         }
 
+        // Step 1: Find the middle using slow and fast pointers
         ListNode* slow = head;
         ListNode* fast = head;
         
+        // This ensures slow lands on the first middle node for even-length lists
         while (fast->next != NULL && fast->next->next != NULL) {
             slow = slow->next;
             fast = fast->next->next;
         }
 
-        ListNode* secondHalfHead = reverseList(slow->next);
-        ListNode* p1 = head;
-        ListNode* p2 = secondHalfHead;
-        bool isPal = true;
+        // Step 2: Reverse the second half of the list
+        // slow->next is the start of the second half
+        ListNode* secondHalf = reverseList(slow->next);
         
-        while (p2 != NULL) {
-            if (p1->val != p2->val) {
-                isPal = false;
-                break;
+        // Step 3: Compare the first half and the reversed second half
+        ListNode* firstHalf = head;
+        ListNode* temp2 = secondHalf; 
+        
+        while (temp2 != NULL) {
+            if (firstHalf->val != temp2->val) {
+                return false; // Mismatch found
             }
-            p1 = p1->next;
-            p2 = p2->next;
+            firstHalf = firstHalf->next;
+            temp2 = temp2->next;
         }
 
-        slow->next = reverseList(secondHalfHead);
+        // Step 4 (Optional but good practice): Restore the list to its original state
+        // slow->next = reverseList(secondHalf);
 
-        return isPal;
+        return true; // All nodes matched
     }
 };
