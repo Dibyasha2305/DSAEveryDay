@@ -5,22 +5,23 @@ public:
 
         for (char c : s) {
 
-            if (c == '(' || c == '[' || c == '{') {
+            // Opening brackets
+            if (c == '(' || c == '{' || c == '[') {
                 st.push(c);
             }
 
+            // Closing brackets
             else {
                 if (st.empty())
                     return false;
 
-                if (c == ')' && st.top() != '(')
-                    return false;
+                char top = st.top();
 
-                if (c == ']' && st.top() != '[')
+                if ((c == ')' && top != '(') ||
+                    (c == '}' && top != '{') ||
+                    (c == ']' && top != '[')) {
                     return false;
-
-                if (c == '}' && st.top() != '{')
-                    return false;
+                }
 
                 st.pop();
             }
